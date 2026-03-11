@@ -3,13 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:taghyeer_test/common/themes/app_theme.dart';
 import 'package:taghyeer_test/common/utils/routing/app_pages.dart';
+import 'package:taghyeer_test/data/remote/controller/network_controller.dart';
 
 import 'common/utils/di/dependency_injection.dart';
 import 'common/utils/routing/app_routes.dart';
+import 'data/local/controller/storage_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  _initApp();
+  await _initApp();
   runApp(
     /// Initialize ScreenUtil for responsive design.
     /// Design size matches iPhone X dimensions (375x812).
@@ -22,7 +24,9 @@ void main() async {
   );
 }
 
-void _initApp() {
+Future<void> _initApp()async {
+  await StorageController().init();
+  await NetworkController().init();
   DependencyInjection.init();
 }
 
