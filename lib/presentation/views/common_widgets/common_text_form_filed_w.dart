@@ -1,10 +1,33 @@
+/// Reusable text field widget with extensive customization options.
+///
+/// This widget provides a flexible text input component that supports:
+/// - Email and password field types
+/// - Custom validation
+/// - Prefix and suffix icons
+/// - Password visibility toggle
+/// - Theme-aware styling (light/dark mode)
+/// - Focus state management
+/// - Custom input formatters
+/// - Error state display
+///
+/// The field automatically adapts its appearance based on focus state
+/// and theme mode, providing visual feedback to users.
+///
+/// Example:
+/// ```dart
+/// CommonTextField(
+///   hint: "Enter email",
+///   controller: emailController,
+///   isEmail: true,
+///   validation: (value) => value?.isEmpty ?? true ? "Required" : null,
+/// )
+/// ```
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../common/colors/app_colors.dart';
 import '../../view_models/theme_vm.dart';
-
 
 class CommonTextField extends StatefulWidget {
   final String? hint;
@@ -220,7 +243,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
         errorStyle: Theme.of(context).textTheme.titleSmall?.copyWith(height: 0),
         hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
           fontSize: widget.hintTextSize ?? 13.sp,
-          color: widget.hintColor ?? AppColors.black,
+          color: _themeVM.isDarkMode(context) ? AppColors.white :widget.hintColor ?? AppColors.black,
           fontWeight: FontWeight.w400,
         ),
         hintText: widget.hint,

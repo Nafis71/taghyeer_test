@@ -1,3 +1,8 @@
+/// Data model for product API responses.
+///
+/// Extends [ProductEntity] and provides JSON serialization/deserialization
+/// for API communication. This model handles the transformation between
+/// API JSON format and domain entities.
 import 'package:taghyeer_test/domain/entities/product_entity_e.dart';
 
 class ProductModel extends ProductEntity {

@@ -1,12 +1,33 @@
+/// Widget for displaying additional product information.
+///
+/// This widget displays supplementary product details including:
+/// - Availability status
+/// - Shipping information
+/// - Return policy
+/// - Warranty information
+/// - Minimum order quantity
+///
+/// Only displays if at least one of these fields is available.
+///
+/// Example:
+/// ```dart
+/// AdditionalInformation(product: productEntity)
+/// ```
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:taghyeer_test/domain/entities/product_entity_e.dart';
 
-import '../../../../../common/dimensions/spacing.dart';
+import '../../../../common/dimensions/spacing.dart';
 
 class AdditionalInformation extends StatelessWidget {
+  /// Product entity containing additional information.
   final ProductEntity product;
 
+  /// Creates a new [AdditionalInformation] instance.
+  ///
+  /// Parameters:
+  /// - [key]: Optional widget key
+  /// - [product]: Product entity with additional information
   const AdditionalInformation({super.key, required this.product});
 
   @override

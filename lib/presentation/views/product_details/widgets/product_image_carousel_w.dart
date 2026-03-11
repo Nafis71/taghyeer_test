@@ -1,16 +1,48 @@
+/// Image carousel widget for displaying product images.
+///
+/// This widget displays a swipeable image carousel with page indicators.
+/// Users can swipe horizontally to view different product images.
+/// The current page index is tracked and displayed as dots at the bottom.
+///
+/// Features:
+/// - Horizontal swipeable PageView
+/// - Page indicator dots
+/// - Network image loading with error handling
+/// - Reactive page index tracking
+///
+/// Example:
+/// ```dart
+/// ProductImageCarousel(
+///   pageController: pageController,
+///   images: product.images,
+///   productVM: productVM,
+/// )
+/// ```
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:taghyeer_test/common/utils/logger/logger_util.dart';
 import 'package:taghyeer_test/presentation/view_models/product_vm.dart';
 
-import '../../../../../common/colors/app_colors.dart';
+import '../../../../common/colors/app_colors.dart';
 
 class ProductImageCarousel extends StatelessWidget {
+  /// Page controller for managing carousel navigation.
   final PageController pageController;
+
+  /// List of image URLs to display.
   final List<String> images;
+
+  /// Product view model for tracking current page index.
   final ProductVM productVM;
 
+  /// Creates a new [ProductImageCarousel] instance.
+  ///
+  /// Parameters:
+  /// - [key]: Optional widget key
+  /// - [pageController]: Page controller for carousel
+  /// - [images]: List of image URLs
+  /// - [productVM]: Product view model for state management
   const ProductImageCarousel({
     super.key,
     required this.pageController,

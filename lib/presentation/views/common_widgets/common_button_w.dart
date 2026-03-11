@@ -1,3 +1,24 @@
+/// Reusable button widget with extensive customization options.
+///
+/// This widget provides a flexible button component that supports:
+/// - Rounded and rectangular button styles
+/// - Bordered and filled button variants
+/// - Loading state with activity indicator
+/// - Prefix and suffix widgets
+/// - Custom colors, fonts, and sizing
+/// - Shadow effects
+///
+/// The button adapts its appearance based on the provided parameters,
+/// making it suitable for various use cases throughout the application.
+///
+/// Example:
+/// ```dart
+/// CommonButton(
+///   title: "Login",
+///   callbackFunction: () => handleLogin(),
+///   showLoading: isLoading,
+/// )
+/// ```
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

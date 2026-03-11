@@ -1,7 +1,41 @@
+/// Application text style configuration.
+///
+/// This class provides a comprehensive text theme with responsive font sizing
+/// using ScreenUtil. It defines all text styles used throughout the application,
+/// including display, headline, title, body, and label styles.
+///
+/// All font sizes are responsive and scale based on screen size.
+///
+/// Example:
+/// ```dart
+/// Text(
+///   'Hello',
+///   style: Theme.of(context).textTheme.headlineSmall,
+/// )
+/// ```
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTextStyle {
+  /// Returns a complete text theme with responsive font sizing.
+  ///
+  /// Creates a [TextTheme] with all text styles configured:
+  /// - Display styles (large, medium, small)
+  /// - Headline styles (large, medium, small)
+  /// - Title styles (large, medium, small)
+  /// - Body styles (large, medium, small)
+  /// - Label styles (large, medium, small)
+  ///
+  /// Parameters:
+  /// - [textColor]: Base text color (defaults to black for light theme)
+  ///
+  /// Returns:
+  /// - [TextTheme] with all text styles configured
+  ///
+  /// Example:
+  /// ```dart
+  /// final textTheme = AppTextStyle.getTextStyles(Colors.black);
+  /// ```
   static TextTheme getTextStyles([Color textColor = Colors.black]) {
     return TextTheme(
       displayLarge: getBaseTextTheme(textColor).copyWith(

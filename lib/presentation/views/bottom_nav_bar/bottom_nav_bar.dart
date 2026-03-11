@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:taghyeer_test/presentation/view_models/theme_vm.dart';
+import 'package:taghyeer_test/presentation/views/post_list/views/post_list.dart';
 import 'package:taghyeer_test/presentation/views/product_list/views/product_list_v.dart';
+import 'package:taghyeer_test/presentation/views/settings/views/settings_v.dart';
 
 import '../../../common/assets/svg/svg_asset.dart';
 import '../../../common/colors/app_colors.dart';
@@ -17,13 +20,10 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   final BottomNavigationVM _bottomNavigationVM = Get.find();
+  final ThemeVM _themeVM = Get.find();
 
   /// List of all main screens accessible via bottom navigation.
-  List<Widget> screens = [
-    ProductList(),
-    SizedBox.shrink(),
-    SizedBox.shrink(),
-  ];
+  List<Widget> screens = [ProductList(), PostList(), Settings()];
 
   /// Outlined icon paths for inactive navigation tabs.
   List<String> outlinedIcons = [
@@ -47,34 +47,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
     return Obx(
       () => Scaffold(
         body: screens[_bottomNavigationVM.currentIndex],
-        bottomNavigationBar: Theme(
-          data: ThemeData(
-            splashColor: AppColors.cTransparent,
-            splashFactory: NoSplash.splashFactory,
-          ),
-          child: BottomNavigationBar(
+        bottomNavigationBar: Obx(
+          () => BottomNavigationBar(
             currentIndex: _bottomNavigationVM.currentIndex,
             useLegacyColorScheme: false,
-            type: BottomNavigationBarType.fixed,
-            selectedFontSize: 12.sp,
-            unselectedFontSize: 12.sp,
-            selectedLabelStyle: TextStyle(
-              color: AppColors.black,
-              fontSize: 12.sp,
-              fontWeight: FontWeight.bold,
-            ),
-            unselectedLabelStyle: TextStyle(
-              color: Colors.grey.shade600,
-              fontSize: 12.sp,
-            ),
             onTap: (index) {
               _bottomNavigationVM.setCurrentIndex = index;
             },
-            backgroundColor: AppColors.white,
-            elevation: 12,
-            selectedItemColor: AppColors.black,
-            unselectedItemColor: Colors.grey.shade600,
-            enableFeedback: true,
             items: List.generate(screens.length, (index) {
               return _getNavigationBarItem(index);
             }),
@@ -87,7 +66,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   BottomNavigationBarItem _getNavigationBarItem(int index) {
     return BottomNavigationBarItem(
       icon: RPadding(
-        padding: .only(top: 8.r),
+        padding: .only(top: 8.r,bottom: 3.r),
         child: SvgPictureWidget(
           assetPath: outlinedIcons[index],
           width: 24.w,
@@ -98,14 +77,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
         ),
       ),
       label: screenNames[index],
-      activeIcon: RPadding(
-        padding: .only(top: 8.r),
+      activeIcon: Obx(()=>RPadding(
+        padding: .only(top: 8.r,bottom: 3.r),
         child: SvgPictureWidget(
           width: 24.w,
           height: 24.h,
           assetPath: filledIcons[index],
+          color: _themeVM.isDarkMode(context) ? AppColors.white : null,
         ),
-      ),
+      )),
     );
   }
 }

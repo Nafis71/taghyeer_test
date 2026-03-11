@@ -1,3 +1,8 @@
+/// Data model for login API responses.
+///
+/// Extends [LoginEntity] and provides JSON serialization/deserialization
+/// for API communication. This model handles the transformation between
+/// API JSON format and domain entities.
 import 'package:taghyeer_test/domain/entities/login_e.dart';
 
 class LoginModel extends LoginEntity {

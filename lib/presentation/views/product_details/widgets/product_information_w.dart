@@ -1,16 +1,42 @@
+/// Widget for displaying comprehensive product information.
+///
+/// This widget displays all product details including title, price, discount,
+/// rating, stock status, description, extra details, tags, and additional
+/// information. It composes multiple smaller widgets to create a complete
+/// product information display.
+///
+/// Features:
+/// - Product title and pricing
+/// - Discount badge display
+/// - Rating and stock status
+/// - Product description
+/// - Extra details (brand, category, SKU, weight)
+/// - Product tags
+/// - Additional information (warranty, shipping, etc.)
+///
+/// Example:
+/// ```dart
+/// ProductInformation(product: productEntity)
+/// ```
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:taghyeer_test/presentation/views/product_details/views/widgets/additional_information_w.dart';
-import 'package:taghyeer_test/presentation/views/product_details/views/widgets/product_extra_details_w.dart';
-import 'package:taghyeer_test/presentation/views/product_details/views/widgets/product_tag_w.dart';
+import 'package:taghyeer_test/presentation/views/product_details/widgets/additional_information_w.dart';
+import 'package:taghyeer_test/presentation/views/product_details/widgets/product_extra_details_w.dart';
+import 'package:taghyeer_test/presentation/views/product_details/widgets/product_tag_w.dart';
 
-import '../../../../../common/dimensions/app_padding.dart';
-import '../../../../../common/dimensions/spacing.dart';
-import '../../../../../domain/entities/product_entity_e.dart';
+import '../../../../common/dimensions/app_padding.dart';
+import '../../../../common/dimensions/spacing.dart';
+import '../../../../domain/entities/product_entity_e.dart';
 
 class ProductInformation extends StatelessWidget {
+  /// Product entity to display information for.
   final ProductEntity product;
 
+  /// Creates a new [ProductInformation] instance.
+  ///
+  /// Parameters:
+  /// - [key]: Optional widget key
+  /// - [product]: Product entity to display
   const ProductInformation({super.key, required this.product});
 
   @override
@@ -112,8 +138,6 @@ class ProductInformation extends StatelessWidget {
                 ],
               ),
               Spacing.vertical(16),
-
-              // Description
               if (product.description != null &&
                   product.description!.isNotEmpty) ...[
                 Text(
@@ -129,15 +153,9 @@ class ProductInformation extends StatelessWidget {
                 ),
                 Spacing.vertical(16),
               ],
-
-              // Product Details Section
               ProductExtraDetails(product: product),
               Spacing.vertical(16),
-
-              // Tags
               ProductTag(product: product),
-
-              // Additional Information
               AdditionalInformation(product: product),
             ],
           ),

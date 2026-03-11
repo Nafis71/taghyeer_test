@@ -1,3 +1,20 @@
+/// Card widget for displaying product items in a list.
+///
+/// This widget displays a product card with thumbnail image, title,
+/// description, price, and discount badge. Tapping the card navigates
+/// to the product details screen.
+///
+/// Features:
+/// - Product thumbnail image
+/// - Discount badge overlay
+/// - Truncated title and description
+/// - Formatted price display
+/// - Navigation to product details
+///
+/// Example:
+/// ```dart
+/// ProductListCard(product: productEntity)
+/// ```
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -12,8 +29,14 @@ import '../../common_widgets/svg_picture_w.dart';
 import '../../product_details/views/product_details_v.dart';
 
 class ProductListCard extends StatelessWidget {
+  /// Product entity to display.
   final ProductEntity product;
 
+  /// Creates a new [ProductListCard] instance.
+  ///
+  /// Parameters:
+  /// - [key]: Optional widget key
+  /// - [product]: Product entity to display
   const ProductListCard({super.key, required this.product});
 
   @override
