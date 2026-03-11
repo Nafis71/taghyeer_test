@@ -22,6 +22,8 @@ class NetworkController {
   String? _accessToken;
 
   String? get accessToken => _accessToken;
+  set setAccessToken(String accessToken) => _accessToken = accessToken;
+
 
   Future<void> init() async {
     _dio = Dio(
@@ -55,14 +57,17 @@ class NetworkController {
             "REQUEST[${requestOption.method}] => RESPONSE: ${requestOption.path}"
             "=> REQUEST VALUES: ${requestOption.queryParameters} => HEADERS: ${requestOption.headers}",
           );
+          return handler.next(requestOption);
         },
         onError: (error, handler) {
           logger.i("Error[${error.response?.statusCode}]");
+          return handler.next(error);
         },
         onResponse: (response, handler) {
           logger.i(
             "RESPONSE[${response.statusCode}] => DATA: ${response.data}",
           );
+          return handler.next(response);
         },
       ),
     );
@@ -71,12 +76,12 @@ class NetworkController {
   Future<ApiResponse> request({
     required String url,
     required Method method,
-    Map<String, String>? params,
+    Map<String, dynamic>? params,
     ResponseType? responseType,
   }) async {
     try {
       logger.i("Params: $params}");
-      final response = await compute(_performHttpRequest, {
+      final response = await _performHttpRequest({
         'url': url,
         'method': method,
         'params': params,
@@ -135,7 +140,7 @@ class NetworkController {
     final responseType = data['responseType'];
     try {
       Response response;
-
+      logger.i("is dio null? : ${_dio == null}");
       switch (method) {
         case Method.post:
           response = await _dio!.post(
